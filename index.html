@@ -1,69 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Continue to Gemini API Keys</title>
-  
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-    .container {
-      background-color: white;
-      padding: 40px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 24px;
-    }
-    p {
-      font-size: 16px;
-      line-height: 1.5;
-    }
-    .continue-button {
-      display: inline-block;
-      padding: 12px 24px;
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: bold;
-      color: white;
-      background-color: #1a73e8;
-      border: none;
-      border-radius: 8px;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background-color 0.2s, transform 0.2s;
-    }
-    .continue-button:hover {
-      background-color: #1669c7;
-      transform: translateY(-2px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Redirect</title>
+    <!-- Use Tailwind CSS for a clean, modern look -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <div class="container">
-    <h1>You're almost there!</h1>
-    <p>For security, please click the button below to continue to the Gemini API key page.</p>
-    <a 
-      class="continue-button" 
-      href="https://aistudio.google.com/app/apikey" 
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
-      Open Gemini API Keys Page
-    </a>
-  </div>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white p-8 rounded-xl shadow-2xl max-w-sm w-full text-center space-y-6 transform transition-transform duration-500 hover:scale-105">
+        <!-- Heading and explanatory text -->
+        <div class="space-y-2">
+            <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight">Authentication Required</h1>
+            <p class="text-lg text-gray-500">
+                To continue, you'll need to sign in to your Gemini account.
+            </p>
+        </div>
+        
+        <!-- Re-designed button for a more official feel -->
+        <button 
+            id="continue-button"
+            class="inline-flex items-center justify-center w-full px-6 py-3 font-semibold text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300 transition ease-in-out duration-200"
+        >
+            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h-2a2 2 0 00-2 2v2m8-8a2 2 0 00-2 2v2m0-4a2 2 0 00-2-2m2 2l-6 6" />
+            </svg>
+            Continue to Gemini
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('continue-button').addEventListener('click', function() {
+            // Open the new window/tab first.
+            const newWindow = window.open('https://aistudio.google.com/app/apikey', '_blank', 'noopener');
+            
+            // Wait a brief moment to ensure the new window is open, then close the current page.
+            // This is the key to severing the "opener" relationship completely.
+            setTimeout(function() {
+                window.close();
+            }, 100);
+        });
+    </script>
 </body>
 </html>
